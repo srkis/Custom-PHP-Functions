@@ -1,3 +1,14 @@
+<!--
+***********************************************
+* Author: Srdjan Stojanovic                   *
+* Author URL: https:srdjan.icodes.rocks       *
+* Email: stojanovicsrdjan27@gmail.com         *
+* THANK YOU FOR INTERESTING FOR MY CODE:)     *
+*                                             *
+********************************************* *
+-->
+
+
 //Die dump function - Laravel style
 public function dd()
 		 {
@@ -10,28 +21,33 @@ public function dd()
 ###################################################################
 
 //Return min and max date from array
- if(is_array($date_arr) && count($date_arr) > 0 ) {
-                
-          for ($i = 0; $i < count($date_arr); $i++) {
-              if ($i == 0) {
+public function getMinAndMaxDate($date_arr) {
+	 if(is_array($date_arr) && count($date_arr) > 0 ) {
 
-                    $max_date = date('Y-m-d H:i:s', strtotime($date_arr[$i]));
-                    $min_date = date('Y-m-d H:i:s', strtotime($date_arr[$i]));
-                  }
-                  else if ($i != 0) {
-                      $new_date = date('Y-m-d H:i:s', strtotime($date_arr[$i]));
-                      if ($new_date > $max_date) {
-                          $max_date = $new_date;
-                      } else if ($new_date < $min_date) {
-                          $min_date = $new_date;
-                      }
-                  }
-              }
+		  for ($i = 0; $i < count($date_arr); $i++) {
+		      if ($i == 0) {
 
-         echo date('d-m-Y',strtotime($max_date));
-         echo date('d-m-Y',strtotime($min_date));
+			    $max_date = date('Y-m-d H:i:s', strtotime($date_arr[$i]));
+			    $min_date = date('Y-m-d H:i:s', strtotime($date_arr[$i]));
+			  }
+			  else if ($i != 0) {
+			      $new_date = date('Y-m-d H:i:s', strtotime($date_arr[$i]));
+			      if ($new_date > $max_date) {
+				  $max_date = $new_date;
+			      } else if ($new_date < $min_date) {
+				  $min_date = $new_date;
+			      }
+			  }
+		      }
+
+
+return $minMax = [
+		  "max" => date('d-m-Y',strtotime($max_date)), 
+		  "min" => date('d-m-Y',strtotime($min_date))
+		  ];
+			
+		}
 }
-
 
 ###################################################################
 
@@ -49,6 +65,33 @@ function get_client_language($availableLanguages, $default='en'){
 		}
 	} 
 	return $default;
+}
+
+###################################################################
+
+//Create random hash. Default length is 10.
+
+ public function generateHash($lenght = 10)
+  {
+      $hashChars = 'qwertyuioasdfghjkl12234567890AQWSEDRFTGYHUJIKOLPZ';
+      $charLenght = strlen($hashChars);
+      $randHash = '';
+      for($i = 0; $i < $lenght; $i++){
+          $randHash.= $hashChars[rand(0, $charLenght -1)];
+      }
+      return $randHash;
+  }
+
+###################################################################
+
+//Create json from array
+public function parse_json($data, $status_code = 200 )
+{
+    set_status_header($status_code, "");
+    header("Content-type: application/json");
+
+    echo json_encode($data);
+    exit;
 }
 
 ###################################################################
