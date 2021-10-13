@@ -10,12 +10,11 @@
 
 
 //Die dump function - Laravel style
-public function dd()
-		 {
-			 echo '<pre>';
-			 array_map(function($x) {var_dump($x);}, func_get_args());
-			 die("Controller/Traits/Services/General.php - dd function");
-		  }
+public function dd() {
+		   echo '<pre>';
+	           array_map(function($x) {var_dump($x);}, func_get_args());
+	           die("Controller/Traits/Services/General.php - dd function");
+		 }
 
 
 ###################################################################
@@ -96,5 +95,24 @@ public function parse_json($data, $status_code = 200 )
 
 ###################################################################
 
+// Get post from xml rss feed
+
+
+public function getRSS($link){
+	$rss = file_get_contents($link);
+
+	$xml = simplexml_load_string($rss);
+
+	$posts = array();
+	foreach($xml->channel->item as $item){
+		$posts[] = array(
+		'image' => (string)$item->image,
+		'title' => (string)$item->title,
+		'description' => (string)$item->description,
+		'pubDate' => (string)$item->pubDate,
+		'link' => (string)$item->link
+		);
+	}
+	return $posts;
 
 
