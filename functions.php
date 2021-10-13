@@ -442,9 +442,11 @@ public function formatDateTime($dateTime)
 
 ###################################################################
 
+define("DEFAULT_HASH", "data_HASH!@#$%^&");
+
 function encryptData($dataToEncrypt) {
 
-        $encrypted_string = openssl_encrypt($dataToEncrypt,"AES-128-ECB", $this->default_hash);
+        $encrypted_string = openssl_encrypt($dataToEncrypt,"AES-128-ECB", DEFAULT_HASH);
         return $encrypted_string;
 
     }
@@ -453,7 +455,7 @@ function encryptData($dataToEncrypt) {
    
    function decryptData($dataToDecrypt) {
 
-        $decrypted_string = openssl_decrypt($dataToDecrypt,"AES-128-ECB", $this->default_hash);
+        $decrypted_string = openssl_decrypt($dataToDecrypt,"AES-128-ECB", DEFAULT_HASH);
         return $decrypted_string;
     }
     
