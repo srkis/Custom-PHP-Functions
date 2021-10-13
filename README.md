@@ -1,1 +1,1 @@
-# Custom-PHP-Functions
+Useful custom PHP functions
