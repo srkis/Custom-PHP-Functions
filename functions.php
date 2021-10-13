@@ -408,3 +408,54 @@ array_walk_recursive($array, function ($i) use (&$count) {
   });
  	return $count;
 }
+
+
+###################################################################
+Format dateTime function
+//input value: 2019-02-27 14:29:34
+// returned value : 27 Feb, 02:29 PM
+public function formatDateTime($dateTime)
+{
+  $yrdata = strtotime($dateTime);
+  return $date = date('d M, h:i A', $yrdata);
+}
+
+###################################################################
+ // Function to get the client ip address
+    public function getUserIp() {
+
+        $ipaddress = '';
+	    if (array_key_exists('HTTP_CLIENT_IP', $_SERVER))
+            $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+        else if (array_key_exists('HTTP_X_FORWARDED_FOR',$_SERVER))
+            $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        else if(array_key_exists('HTTP_X_FORWARDED',$_SERVER))
+            $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+        else if(array_key_exists('HTTP_FORWARDED', $_SERVER))
+            $ipaddress = $_SERVER['HTTP_FORWARDED'];
+        else if(array_key_exists('REMOTE_ADDR', $_SERVER))
+            $ipaddress = $_SERVER['REMOTE_ADDR'];
+        else
+            $ipaddress = 'UNKNOWN';
+        return $ipaddress;
+    }
+
+###################################################################
+
+function encryptData($dataToEncrypt) {
+
+        $encrypted_string = openssl_encrypt($dataToEncrypt,"AES-128-ECB", $this->default_hash);
+        return $encrypted_string;
+
+    }
+
+###################################################################
+   
+   function decryptData($dataToDecrypt) {
+
+        $decrypted_string = openssl_decrypt($dataToDecrypt,"AES-128-ECB", $this->default_hash);
+        return $decrypted_string;
+    }
+    
+    
+    
