@@ -460,4 +460,23 @@ function encryptData($dataToEncrypt) {
     }
     
     
+###################################################################
     
+    // Get src attribute from base64 encoded image in text
+    function getSrc($post) {
+
+	    $src = '';
+
+	    $doc = new DOMDocument();
+		libxml_use_internal_errors(true);
+		$doc->loadHTML( $post['post_content'] );
+		$xpath = new DOMXPath($doc);
+		$imgs = $xpath->query("//img");
+		for ($i=0; $i < $imgs->length; $i++) {
+		    $img = $imgs->item($i);
+		    $src = $img->getAttribute("src");
+		}
+		
+		return $src;
+            }
+        
